@@ -9,3 +9,5 @@ end
 Sidekiq.configure_client do |config|
   config.redis = { host: host, port: port, password: password }
 end
+
+Sidekiq::Logging.logger.level = Logger::WARN

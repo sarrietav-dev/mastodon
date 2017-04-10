@@ -1,8 +1,0 @@
-.env
-.env.*
-public/system
-public/assets
-node_modules
-storybook
-neo4j
-vendor/bundle

@@ -13,6 +13,7 @@ services:
     volumes:
       - ./public/assets:/mastodon/public/assets
       - ./public/system:/mastodon/public/system
+
   streaming:
     restart: always
     build: .
@@ -23,6 +24,7 @@ services:
     depends_on:
       - db
       - redis
+
   sidekiq:
     restart: always
     build: .

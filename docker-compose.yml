@@ -7,13 +7,13 @@ services:
       - DB_POOL=20
     image: postgres:alpine
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - /mnt/volume-nyc1-01/postgres:/var/lib/postgresql/data
 
   redis:
     restart: always
     image: redis:alpine
     volumes:
-      - ./redis:/data
+      - /mnt/volume-nyc1-01/redis:/data
 
   web:
     restart: always

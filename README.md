@@ -12,4 +12,4 @@ We block the [instances listed here](https://github.com/tootcafe/blocked-instanc
 for the reasons stated there. [Contact me](mailto:ash@ashfurrow.com) if you 
 think your instance is blocked incorrectly.
 
-Custom Mastodon gear image courtesy of [@pyrorian](https://mastodon.technology/@pyrorian).
+Custom Mastodon gear image courtesy of [@pyrorian](https://mastodon.technology/@pyrorian). Colour scheme available [here](http://www.colourlovers.com/palette/298957/Paris_mon_Amour).

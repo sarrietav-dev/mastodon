@@ -38,6 +38,8 @@ services:
     build: .
     image: gargron/mastodon
     env_file: .env.production
+    environment:
+      - LOG_LEVEL=warn
     command: npm run start
     ports:
       - "4000:4000"

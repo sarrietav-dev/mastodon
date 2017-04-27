@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Status < ApplicationRecord
-  include ActiveModel::Validations
   include Paginable
   include Streamable
   include Cacheable
@@ -138,6 +137,10 @@ class Status < ApplicationRecord
       query = query.where('accounts.domain IS NULL') if local_only
 
       account.nil? ? filter_timeline_default(query) : filter_timeline_default(filter_timeline(query, account))
+    end
+
+    def as_outbox_timeline(account)
+      where(account: account, visibility: :public)
     end
 
     def favourites_map(status_ids, account_id)

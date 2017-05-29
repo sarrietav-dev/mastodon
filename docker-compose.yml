@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
 
   db:
@@ -16,9 +16,9 @@ services:
       - /mnt/volume-nyc1-01/redis:/data
 
   web:
-    restart: always
     build: .
     image: gargron/mastodon
+    restart: always
     env_file: .env.production
     environment:
       - WEB_CONCURRENCY=6
@@ -31,12 +31,13 @@ services:
       - redis
     volumes:
       - ./public/assets:/mastodon/public/assets
+      - ./public/packs:/mastodon/public/packs
       - ./public/system:/mastodon/public/system
 
   streaming:
-    restart: always
     build: .
     image: gargron/mastodon
+    restart: always
     env_file: .env.production
     environment:
       - LOG_LEVEL=warn
@@ -48,9 +49,9 @@ services:
       - redis
 
   sidekiq:
-    restart: always
     build: .
     image: gargron/mastodon
+    restart: always
     env_file: .env.production
     command: bundle exec sidekiq -c 50 -q default -q mailers -q pull -q push
     depends_on:

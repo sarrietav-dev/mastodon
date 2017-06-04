@@ -20,9 +20,6 @@ services:
     image: gargron/mastodon
     restart: always
     env_file: .env.production
-    environment:
-      - WEB_CONCURRENCY=5
-      - RAILS_LOG_LEVEL=warn
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     ports:
       - "3000:3000"
@@ -39,8 +36,6 @@ services:
     image: gargron/mastodon
     restart: always
     env_file: .env.production
-    environment:
-      - LOG_LEVEL=warn
     command: npm run start
     ports:
       - "4000:4000"

@@ -42,7 +42,6 @@ fi:
   authorize_follow:
     error: Valitettavasti tapahtui virhe etätilin haussa.
     follow: Seuraa
-    prompt_html: 'Sinä (<strong>%{self}</strong>) olet pyytänyt lupaa seurata:'
     title: Seuraa %{acct}
   datetime:
     distance_in_words:
@@ -104,6 +103,17 @@ fi:
     reblog:
       body: 'Sinun statustasi boostasi %{name}:'
       subject: "%{name} boostasi statustasi"
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          billion: B
+          million: M
+          quadrillion: Q
+          thousand: K
+          trillion: T
+          unit: ''
   pagination:
     next: Seuraava
     prev: Edellinen

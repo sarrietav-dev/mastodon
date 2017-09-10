@@ -106,7 +106,7 @@ nl:
       domain: Domein
       new:
         create: Blokkade aanmaken
-        hint: Een domeinblokkade voorkomt niet dat accountgegevens van dit domein aan de database worden toegevoegd, maar dat er met terugwerkende kracht en automatisch bepaalde moderatiemethoden op deze accounts worden toegepast. 
+        hint: Een domeinblokkade voorkomt niet dat accountgegevens van dit domein aan de database worden toegevoegd, maar dat er met terugwerkende kracht en automatisch bepaalde moderatiemethoden op deze accounts worden toegepast.
         severity:
           desc_html: "<strong>Negeren</strong> zorgt ervoor dat berichten van accounts van dit domein voor iedereen onzichtbaar zijn, behalve als een account wordt gevolgd. <strong>Opschorten</strong> zorgt ervoor dat alle berichten, media en profielgegevens van accounts van dit domein worden verwijderd. Gebruik <strong>Geen</strong> wanneer je alleen mediabestanden wilt weigeren."
           noop: Geen
@@ -129,7 +129,7 @@ nl:
           suspend: Alle opgeschorste accounts van dit domein niet meer opschorten
         title: Domeinblokkade voor %{domain} ongedaan maken
         undo: Ongedaan maken
-      title: Domeinblokkades 
+      title: Domeinblokkades
       undo: Ongedaan maken
     instances:
       account_count: Bekende accounts
@@ -169,7 +169,7 @@ nl:
           title: Bericht wanneer registratie is uitgeschakeld
         deletion:
           desc_html: Toestaan dat iedereen hun eigen account kan verwijderen
-          title:  Verwijderen account toestaan
+          title: Verwijderen account toestaan
         open:
           desc_html: Toestaan dat iedereen een account kan registereren
           title: Open registratie
@@ -220,7 +220,7 @@ nl:
   applications:
     invalid_url: De opgegeven URL is ongeldig
   auth:
-    agreement_html: Wanneer je op registeren klikt ga je akkoord met <a href="%{rules_path}">onze gebruikersvoorwaarden</a> en <a href="%{terms_path}">ons privacybeleid</a>.
+    agreement_html: Wanneer je op registreren klikt ga je akkoord met <a href="%{rules_path}">onze gebruikersvoorwaarden</a> en <a href="%{terms_path}">ons privacybeleid</a>.
     change_password: Beveiliging
     delete_account: Account verwijderen
     delete_account_html: Wanneer je jouw account graag wilt verwijderen, kan je dat <a href="%{path}">hier doen</a>. We vragen jou daar om een bevestiging.
@@ -241,7 +241,6 @@ nl:
       close: Of je kan dit venster gewoon sluiten.
       return: Ga terug naar het profiel van de gebruiker
       web: Ga naar de webapp
-    prompt_html: 'Je (<strong>%{self}</strong>) hebt toestemming gevraagd om iemand te mogen volgen:'
     title: Volg %{acct}
   datetime:
     distance_in_words:
@@ -273,7 +272,7 @@ nl:
       content: Veiligheidsverificatie mislukt. Blokkeer je toevallig cookies?
       title: Veiligheidsverificatie mislukt
     '429': Te veel verbindingsaanvragen.
-    noscript: Schakel JavaScript in om de webapplicatie van Mastodon te gebruiken. Als alternatief kan je een Mastodon-app zoeken voor jouw platform.
+    noscript_html: Schakel JavaScript in om de webapplicatie van Mastodon te gebruiken. Als alternatief kan je een <a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md">Mastodon-app</a> zoeken voor jouw platform.
   exports:
     blocks: Jij blokkeert
     csv: CSV
@@ -307,7 +306,7 @@ nl:
       following: Volglijst
       muting: Negeerlijst
     upload: Uploaden
-  landing_strip_html: <strong>%{name}</strong> is een gebruiker op %{link_to_root_path}. Je kunt deze volgen en ermee communiceren als je ergens in deze fediverse een account hebt.
+  landing_strip_html: "<strong>%{name}</strong> is een gebruiker op %{link_to_root_path}. Je kunt deze volgen en ermee communiceren als je ergens in deze fediverse een account hebt."
   landing_strip_signup_html: Als je dat niet hebt, kun je je <a href="%{sign_up_path}">hier registreren</a>.
   media_attachments:
     validations:
@@ -338,6 +337,17 @@ nl:
     reblog:
       body: 'Jouw toot werd door %{name} geboost:'
       subject: "%{name} boostte jouw toot"
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          billion: B
+          million: M
+          quadrillion: Q
+          thousand: K
+          trillion: T
+          unit: ''
   pagination:
     next: Volgende
     prev: Vorige
@@ -354,9 +364,6 @@ nl:
       title: "%{name} vermeldde jou"
     reblog:
       title: "%{name} boostte jouw toot"
-    subscribed:
-      body: Je kan nu pushmeldingen ontvangen.
-      title: Aanmelding bevestigd!
   remote_follow:
     acct: Geef jouw account@domein.tld op waarvandaan je wilt volgen
     missing_resource: Kon vereiste doorverwijzings-URL voor jouw account niet vinden
@@ -510,7 +517,7 @@ nl:
     generate_recovery_codes: Herstelcodes genereren
     instructions_html: "<strong>Scan deze QR-code in Google Authenticator of een soortgelijke app op jouw mobiele telefoon</strong>. Van nu af aan genereert deze app aanmeldcodes die je bij het aanmelden moet invoeren."
     lost_recovery_codes: Met herstelcodes kun je toegang tot jouw account krijgen wanneer je jouw telefoon bent kwijtgeraakt. Wanneer je jouw herstelcodes bent kwijtgeraakt, kan je ze hier opnieuw genereren. Jouw oude herstelcodes zijn daarna ongeldig.
-    manual_instructions: 'Hieronder vind je de geheime code in platte tekst. Voor het geval je de QR-code niet kunt scannen en het handmatig moet invoeren.'
+    manual_instructions: Hieronder vind je de geheime code in platte tekst. Voor het geval je de QR-code niet kunt scannen en het handmatig moet invoeren.
     recovery_codes: Herstelcodes back-uppen
     recovery_codes_regenerated: Opnieuw genereren herstelcodes geslaagd
     recovery_instructions_html: Wanneer je ooit de toegang verliest tot jouw telefoon, kan je met behulp van een van de herstelcodes hieronder opnieuw toegang krijgen tot jouw account. Zorg ervoor dat je de herstelcodes op een veilige plek bewaard. (Je kunt ze bijvoorbeeld printen en ze samen met andere belangrijke documenten bewaren.)

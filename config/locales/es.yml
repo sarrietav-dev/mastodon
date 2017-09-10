@@ -43,7 +43,6 @@ es:
   authorize_follow:
     error: Desafortunadamente, ha ocurrido un error buscando la cuenta remota
     follow: Seguir
-    prompt_html: 'Tú (<strong>%{self}</strong>) has solicitado seguir:'
     title: Seguir %{acct}
   datetime:
     distance_in_words:
@@ -109,6 +108,17 @@ es:
     reblog:
       body: "%{name} ha retooteado tu estado"
       subject: "%{name} ha retooteado tu estado"
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          billion: B
+          million: M
+          quadrillion: Q
+          thousand: K
+          trillion: T
+          unit: ''
   pagination:
     next: Próximo
     prev: Anterior

@@ -140,7 +140,6 @@ zh-TW:
   authorize_follow:
     error: 對不起，尋找這個跨站使用者的過程發生錯誤
     follow: 關注
-    prompt_html: 您 (<strong>%{self}</strong>) 正準備關注︰
     title: 關注 %{acct}
   datetime:
     distance_in_words:
@@ -212,6 +211,17 @@ zh-TW:
     reblog:
       body: 您的文章被 %{name} 轉推
       subject: "%{name} 轉推了您的文章"
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          billion: B
+          million: M
+          quadrillion: Q
+          thousand: K
+          trillion: T
+          unit: ''
   pagination:
     next: 下一頁
     prev: 上一頁

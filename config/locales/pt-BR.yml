@@ -169,7 +169,6 @@ pt-BR:
   authorize_follow:
     error: Infelizmente houve um erro olhando uma conta remota
     follow: Seguir
-    prompt_html: 'Você (<strong>%{self}</strong>) pediu pra seguir:'
     title: Seguir %{acct}
   datetime:
     distance_in_words:
@@ -256,6 +255,17 @@ pt-BR:
     reblog:
       body: 'O seu post foi reblogado por %{name}:'
       subject: "%{name} reblogou o seu post"
+  number:
+    human:
+      decimal_units:
+        format: "%n%u"
+        units:
+          billion: B
+          million: M
+          quadrillion: Q
+          thousand: K
+          trillion: T
+          unit: ''
   pagination:
     next: Next
     prev: Prev

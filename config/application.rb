@@ -9,8 +9,8 @@ Bundler.require(*Rails.groups)
 require_relative '../app/lib/exceptions'
 require_relative '../lib/paperclip/gif_transcoder'
 require_relative '../lib/paperclip/video_transcoder'
+require_relative '../lib/mastodon/snowflake'
 require_relative '../lib/mastodon/version'
-require_relative '../lib/mastodon/unique_retry_job_middleware'
 
 Dotenv::Railtie.load
 
@@ -54,6 +54,7 @@ module Mastodon
       :pt,
       :'pt-BR',
       :ru,
+      :sv,
       :th,
       :tr,
       :uk,

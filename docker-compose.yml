@@ -47,6 +47,8 @@ services:
     build: .
     image: gargron/mastodon
     restart: always
+    environment:
+      - DB_POOL=50
     env_file: .env.production
     command: bundle exec sidekiq -c 50 -q default -q mailers -q pull -q push
     depends_on:

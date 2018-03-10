@@ -26,8 +26,6 @@ services:
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
     networks:
       - internal_network
-    ports:
-      - "9200:9200"
     volumes:
       - ./elasticsearch:/usr/share/elasticsearch/data
 

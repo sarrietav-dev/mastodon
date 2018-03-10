@@ -27,7 +27,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - ./mnt/volume-nyc1-02:/usr/share/elasticsearch/data
+      - /mnt/volume-nyc1-02:/usr/share/elasticsearch/data
 
   web:
     build: .

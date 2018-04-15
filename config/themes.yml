@@ -1,1 +1,3 @@
-default: styles/custom.scss
+default: styles/technology.scss
+Eugen: styles/application.scss
+ArcDark: styles/arcdark.scss

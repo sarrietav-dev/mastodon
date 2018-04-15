@@ -1579,7 +1579,7 @@
     &:focus,
     &:hover,
     &:active {
-      background: $ui-highlight-color;
+      background: darken($ui-secondary-color, 20%);
       color: $ui-secondary-color;
       outline: 0;
     }

@@ -7,7 +7,7 @@
 
     .detailed-status.light,
     .status.light {
-      border-bottom: 1px solid $ui-secondary-color;
+      border-bottom: 1px solid $ui-card-secondary-color;
       animation: none;
     }
 
@@ -83,7 +83,8 @@
         font-size: 14px;
 
         .status__relative-time {
-          color: $ui-primary-color;
+          color: $ui-card-secondary-color;
+          font-weight: bold;
         }
       }
     }
@@ -133,7 +134,7 @@
 
       span {
         font-size: 14px;
-        color: $ui-primary-color;
+        color: $ui-card-secondary-color;
       }
     }
 
@@ -190,7 +191,7 @@
 
         span {
           font-size: 14px;
-          color: $ui-primary-color;
+          color: $ui-card-secondary-color;
         }
       }
     }
@@ -224,7 +225,7 @@
 
     .detailed-status__meta {
       margin-top: 15px;
-      color: $ui-primary-color;
+      color: $ui-card-secondary-color;
       font-size: 14px;
       line-height: 18px;
 

@@ -1,4 +1,5 @@
 default: styles/technology.scss
 ArcDark: styles/arcdark.scss
+Darkest: styles/darkest.scss
 Eugen: styles/application.scss
 SolarizedDark: styles/solarizeddark.scss

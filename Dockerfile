@@ -103,6 +103,11 @@ ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tin
 RUN echo "$TINI_SUM tini" | sha256sum -c -
 RUN chmod +x /tini
 
+# Run in prod mode
+ENV RAILS_SERVE_STATIC_FILES=true
+ENV RAILS_ENV=production
+ENV NODE_ENV=production
+
 USER mastodon
 WORKDIR /opt/mastodon
 ENTRYPOINT ["/tini", "--"]

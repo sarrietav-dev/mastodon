@@ -3,8 +3,6 @@
 
 FROM ubuntu:18.04 as build-dep
 
-EXPOSE 3000 4000
-
 # Use bash for the shell
 SHELL ["bash", "-c"]
 

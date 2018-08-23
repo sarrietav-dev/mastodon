@@ -84,14 +84,13 @@ RUN apt update && \
 	useradd -m -u 991 -g 991 -d /opt/mastodon mastodon && \
 	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
 
-COPY --from=build-dep --chown=991:991 /opt/mastodon /opt/mastodon
+COPY . /opt/mastodon
 
-RUN apt -y --no-install-recommends install \
-	  libssl1.1 libpq5 imagemagick ffmpeg \
-	  libicu60 libprotobuf10 libidn11 \
-	  file ca-certificates tzdata && \
-	ln -s /opt/mastodon /mastodon && \
-	gem install bundler
+RUN apt -y install git libicu-dev libidn11-dev \
+	libpq-dev libprotobuf-dev protobuf-compiler && \
+	cd /opt/mastodon && \
+	bundle install -j$(nproc) --deployment --without development test && \
+	yarn install --pure-lockfile
 
 # Clean up more dirs
 RUN rm -rf /var/cache && \

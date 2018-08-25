@@ -86,8 +86,8 @@ RUN apt update && \
 
 # Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
 COPY . /opt/mastodon
-RUN apt -y install git libicu-dev libidn11-dev \
-	libpq-dev libprotobuf-dev protobuf-compiler && \
+RUN apt -y --no-install-recommends install git libicu-dev libidn11-dev \
+	libpq-dev libprotobuf-dev protobuf-compiler \
 	libssl1.1 libpq5 imagemagick ffmpeg \
 	libicu60 libprotobuf10 libidn11 \
 	file ca-certificates tzdata && \

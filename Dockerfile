@@ -8,7 +8,7 @@ SHELL ["bash", "-c"]
 
 # Install Node
 ENV NODE_VER="6.14.4"
-RUN echo "Etc/UTC" > /etc/localtime && \
+RUN	echo "Etc/UTC" > /etc/localtime && \
 	apt update && \
 	apt -y dist-upgrade && \
 	apt -y install wget make gcc g++ python && \
@@ -17,7 +17,7 @@ RUN echo "Etc/UTC" > /etc/localtime && \
 	tar xf node-v$NODE_VER.tar.gz && \
 	cd node-v$NODE_VER && \
 	./configure --prefix=/opt/node && \
-	make -j$(nproc) && \
+	make -j$(nproc) > /dev/null && \
 	make install
 
 # Install jemalloc
@@ -29,7 +29,7 @@ RUN apt -y install autoconf && \
 	cd jemalloc-$JE_VER && \
 	./autogen.sh && \
 	./configure --prefix=/opt/jemalloc && \
-	make -j$(nproc) && \
+	make -j$(nproc) > /dev/null && \
 	make install_bin install_include install_lib
 
 # Install ruby
@@ -47,7 +47,7 @@ RUN apt -y install zlib1g-dev libssl-dev \
 	  --with-shared \
 	  --disable-install-doc && \
 	ln -s /opt/jemalloc/lib/* /usr/lib/ && \
-	make -j$(nproc) && \
+	make -j$(nproc) > /dev/null && \
 	make install
 
 ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
@@ -55,7 +55,7 @@ ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 RUN npm install -g yarn && \
 	gem install bundler
 
-ENV MASTO_HASH="7ac5151b74510aa82b07e349373bd442176e1e94"
+ENV MASTO_HASH="add3b63a0c84dbad936c461ae2617b1f995fe85b"
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
 	git clone https://github.com/tootsuite/mastodon /opt/mastodon && \
@@ -86,14 +86,13 @@ RUN apt update && \
 
 # Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
 COPY . /opt/mastodon
-RUN apt -y --no-install-recommends install git libicu-dev libidn11-dev \
-	libpq-dev libprotobuf-dev protobuf-compiler \
-	libssl1.1 libpq5 imagemagick ffmpeg \
-	libicu60 libprotobuf10 libidn11 \
-	file ca-certificates tzdata && \
-	cd /opt/mastodon && \
-	bundle install -j$(nproc) --deployment --without development test && \
-	yarn install --pure-lockfile
+
+RUN apt -y --no-install-recommends install \
+	  libssl1.1 libpq5 imagemagick ffmpeg \
+	  libicu60 libprotobuf10 libidn11 \
+	  file ca-certificates tzdata && \
+	ln -s /opt/mastodon /mastodon && \
+	gem install bundler
 
 # Clean up more dirs
 RUN rm -rf /var/cache && \
@@ -106,9 +105,11 @@ RUN echo "$TINI_SUM tini" | sha256sum -c -
 RUN chmod +x /tini
 
 # Run in prod mode
-ENV RAILS_SERVE_STATIC_FILES=true
-ENV RAILS_ENV=production
-ENV NODE_ENV=production
+ENV RAILS_ENV="production"
+ENV NODE_ENV="production"
+
+# Tell rails to serve static files
+ENV RAILS_SERVE_STATIC_FILES="true"
 
 USER mastodon
 WORKDIR /opt/mastodon

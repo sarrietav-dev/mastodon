@@ -84,13 +84,20 @@ RUN apt update && \
 	useradd -m -u 991 -g 991 -d /opt/mastodon mastodon && \
 	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
 
+# Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
 COPY . /opt/mastodon
-
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
 	cd /opt/mastodon && \
 	bundle install -j$(nproc) --deployment --without development test && \
 	yarn install --pure-lockfile
+
+RUN apt -y --no-install-recommends install \
+	  libssl1.1 libpq5 imagemagick ffmpeg \
+	  libicu60 libprotobuf10 libidn11 \
+	  file ca-certificates tzdata && \
+	ln -s /opt/mastodon /mastodon && \
+	gem install bundler
 
 # Clean up more dirs
 RUN rm -rf /var/cache && \

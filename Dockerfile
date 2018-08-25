@@ -55,15 +55,13 @@ ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 RUN npm install -g yarn && \
 	gem install bundler
 
-ENV MASTO_HASH="add3b63a0c84dbad936c461ae2617b1f995fe85b"
+# Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
+COPY . /opt/mastodon
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
-	git clone https://github.com/tootsuite/mastodon /opt/mastodon && \
 	cd /opt/mastodon && \
-	git checkout $MASTO_HASH && \
 	bundle install -j$(nproc) --deployment --without development test && \
-	yarn install --pure-lockfile && \
-	rm -rf .git
+	yarn install --pure-lockfile
 
 FROM ubuntu:18.04
 
@@ -84,8 +82,7 @@ RUN apt update && \
 	useradd -m -u 991 -g 991 -d /opt/mastodon mastodon && \
 	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
 
-# Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
-COPY . /opt/mastodon
+COPY --from=build-dep --chown=991:991 /opt/mastodon /opt/mastodon
 
 RUN apt -y --no-install-recommends install \
 	  libssl1.1 libpq5 imagemagick ffmpeg \

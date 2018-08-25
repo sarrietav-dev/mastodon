@@ -88,16 +88,12 @@ RUN apt update && \
 COPY . /opt/mastodon
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
+	libssl1.1 libpq5 imagemagick ffmpeg \
+	libicu60 libprotobuf10 libidn11 \
+	file ca-certificates tzdata && \
 	cd /opt/mastodon && \
 	bundle install -j$(nproc) --deployment --without development test && \
 	yarn install --pure-lockfile
-
-RUN apt -y --no-install-recommends install \
-	  libssl1.1 libpq5 imagemagick ffmpeg \
-	  libicu60 libprotobuf10 libidn11 \
-	  file ca-certificates tzdata && \
-	ln -s /opt/mastodon /mastodon && \
-	gem install bundler
 
 # Clean up more dirs
 RUN rm -rf /var/cache && \

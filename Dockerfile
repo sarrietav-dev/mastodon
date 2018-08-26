@@ -89,7 +89,7 @@ COPY --from=build-dep --chown=991:991 /opt/mastodon /opt/mastodon
 RUN apt -y --no-install-recommends install \
 	  libssl1.1 libpq5 imagemagick ffmpeg \
 	  libicu60 libprotobuf10 libidn11 \
-	  file ca-certificates tzdata && \
+	  file ca-certificates tzdata libreadline7 && \
 	ln -s /opt/mastodon /mastodon && \
 	gem install bundler
 

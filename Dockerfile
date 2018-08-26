@@ -55,12 +55,12 @@ ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 RUN npm install -g yarn && \
 	gem install bundler
 
-ENV GIT_TAG="add3b63a0c84dbad936c461ae2617b1f995fe85b"
+ENV MASTO_HASH="b5c8963055b37abfd226865edd2012a16dba587c"
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
 	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \
 	cd /opt/mastodon && \
-	git checkout $GIT_TAG && \
+	git checkout $MASTO_HASH && \
 	bundle install -j$(nproc) --deployment --without development test && \
 	yarn install --pure-lockfile && \
 	rm -rf .git

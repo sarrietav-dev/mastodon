@@ -1,9 +1,9 @@
-# mastodon.technology
+# mastodon.technology [![Docker Repository on Quay](https://quay.io/repository/ashfurrow/mastodon/status "Docker Repository on Quay")](https://quay.io/repository/ashfurrow/mastodon) <a href="https://www.statuscake.com" title="Website Uptime Monitoring"><img src="https://app.statuscake.com/button/index.php?Track=GPxZc1jKYG&Days=1&Design=7" /></a>
 
 This is my fork of [Mastodon](https://github.com/tootsuite/mastodon), a
 federated social network. It's hosted on DigitalOcean [(referral link)](https://m.do.co/c/4a83a8a7aedf)
 at [mastodon.technology](https://mastodon.technology), paid for by [my
-lovely Patreon sponsors](https://www.patreon.com/user?u=3581610).
+wonderful Patreon sponsors](https://www.patreon.com/user?u=3581610).
 
 The instance adopts the [TootCat Code of Conduct](https://github.com/TootCat/mastodon/wiki/Code-of-Conduct/41432d2c42ba9be52f2710b8b5c7b77f41271c0b).
 Reports are dealt with regularly.
@@ -28,14 +28,14 @@ git commit -a # Use auto-generated commit message.
 git commit -am "Releasing Docker image for $TAGNAME."
 git tag $RELEASE_TAG_NAME
 git push origin $RELEASE_TAG_NAME
-# Verify release is building on Docker Hub. Take a break, it'll be a while.
+# Verify release is building on Quay.io. Take a break, it'll be a while.
 ```
 
 ## Deploying
 
 Deploying **must always** be done to the staging server first.
 
-New tags and branches on the repo are [built on Docker Hub](https://hub.docker.com/r/ashfurrow/mastodon/). Once built, edit `docker-compose.yml`. The Docker tags are the same as the git tags, so the compose file should be changed to point to that new tag name.
+New tags and branches on the repo are [built on Quay.io](https://quay.io/repository/ashfurrow/mastodon). Once built, edit `docker-compose.yml`. The Docker tags are the same as the git tags, so the compose file should be changed to point to that new tag name.
 
 There's something I don't yet understand with the relationship between the `/public` folder in the _source repo_ and the folder in the Docker container, which `docker-compose.yml` maps to be the same folder. That's okay, I just don't get it yet, so when deploying, check out the same source that the Docker image was built from, and try to figure it out.
 

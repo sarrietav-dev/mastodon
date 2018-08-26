@@ -1,88 +1,113 @@
-FROM ruby:2.4.4-alpine3.6
+# Taken from Sir Boops' Dockerfile: https://git.sergal.org/Sir-Boops/docker-mastodon/src/branch/master/Dockerfile
+# For the purposes of using jemalloc.
 
-LABEL maintainer="https://github.com/tootsuite/mastodon" \
-      description="Your self-hosted, globally interconnected microblogging community"
+FROM ubuntu:18.04 as build-dep
 
-ARG UID=991
-ARG GID=991
+# Use bash for the shell
+SHELL ["bash", "-c"]
 
-ENV PATH=/mastodon/bin:$PATH \
-    RAILS_SERVE_STATIC_FILES=true \
-    RAILS_ENV=production \
-    NODE_ENV=production
+# Install Node
+ENV NODE_VER="6.14.4"
+RUN	echo "Etc/UTC" > /etc/localtime && \
+	apt update && \
+	apt -y dist-upgrade && \
+	apt -y install wget make gcc g++ python && \
+	cd ~ && \
+	wget https://nodejs.org/download/release/v$NODE_VER/node-v$NODE_VER.tar.gz && \
+	tar xf node-v$NODE_VER.tar.gz && \
+	cd node-v$NODE_VER && \
+	./configure --prefix=/opt/node && \
+	make -j$(nproc) > /dev/null && \
+	make install
 
-ARG YARN_VERSION=1.3.2
-ARG YARN_DOWNLOAD_SHA256=6cfe82e530ef0837212f13e45c1565ba53f5199eec2527b85ecbcd88bf26821d
-ARG LIBICONV_VERSION=1.15
-ARG LIBICONV_DOWNLOAD_SHA256=ccf536620a45458d26ba83887a983b96827001e92a13847b45e4925cc8913178
+# Install jemalloc
+ENV JE_VER="5.1.0"
+RUN apt -y install autoconf && \
+	cd ~ && \
+	wget https://github.com/jemalloc/jemalloc/archive/$JE_VER.tar.gz && \
+	tar xf $JE_VER.tar.gz && \
+	cd jemalloc-$JE_VER && \
+	./autogen.sh && \
+	./configure --prefix=/opt/jemalloc && \
+	make -j$(nproc) > /dev/null && \
+	make install_bin install_include install_lib
 
-EXPOSE 3000 4000
+# Install ruby
+ENV RUBY_VER="2.5.1"
+ENV CPPFLAGS="-I/opt/jemalloc/include"
+ENV LDFLAGS="-L/opt/jemalloc/lib/"
+RUN apt -y install zlib1g-dev libssl-dev \
+	  libgdbm-dev libdb-dev libreadline-dev && \
+	cd ~ && \
+	wget https://cache.ruby-lang.org/pub/ruby/${RUBY_VER%.*}/ruby-$RUBY_VER.tar.gz && \
+	tar xf ruby-$RUBY_VER.tar.gz && \
+	cd ruby-$RUBY_VER && \
+	./configure --prefix=/opt/ruby \
+	  --with-jemalloc \
+	  --with-shared \
+	  --disable-install-doc && \
+	ln -s /opt/jemalloc/lib/* /usr/lib/ && \
+	make -j$(nproc) > /dev/null && \
+	make install
 
-WORKDIR /mastodon
+ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 
-RUN apk -U upgrade \
- && apk add -t build-dependencies \
-    build-base \
-    icu-dev \
-    libidn-dev \
-    libressl \
-    libtool \
-    postgresql-dev \
-    protobuf-dev \
-    python \
- && apk add \
-    ca-certificates \
-    ffmpeg \
-    file \
-    git \
-    icu-libs \
-    imagemagick \
-    libidn \
-    libpq \
-    nodejs \
-    nodejs-npm \
-    protobuf \
-    tini \
-    tzdata \
- && update-ca-certificates \
- && mkdir -p /tmp/src /opt \
- && wget -O yarn.tar.gz "https://github.com/yarnpkg/yarn/releases/download/v$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
- && echo "$YARN_DOWNLOAD_SHA256 *yarn.tar.gz" | sha256sum -c - \
- && tar -xzf yarn.tar.gz -C /tmp/src \
- && rm yarn.tar.gz \
- && mv /tmp/src/yarn-v$YARN_VERSION /opt/yarn \
- && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
- && ln -s /opt/yarn/bin/yarnpkg /usr/local/bin/yarnpkg \
- && wget -O libiconv.tar.gz "https://ftp.gnu.org/pub/gnu/libiconv/libiconv-$LIBICONV_VERSION.tar.gz" \
- && echo "$LIBICONV_DOWNLOAD_SHA256 *libiconv.tar.gz" | sha256sum -c - \
- && tar -xzf libiconv.tar.gz -C /tmp/src \
- && rm libiconv.tar.gz \
- && cd /tmp/src/libiconv-$LIBICONV_VERSION \
- && ./configure --prefix=/usr/local \
- && make -j$(getconf _NPROCESSORS_ONLN)\
- && make install \
- && libtool --finish /usr/local/lib \
- && cd /mastodon \
- && rm -rf /tmp/* /var/cache/apk/*
+RUN npm install -g yarn && \
+	gem install bundler
 
-COPY Gemfile Gemfile.lock package.json yarn.lock .yarnclean /mastodon/
+# Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
+COPY . /opt/mastodon
+RUN apt -y install git libicu-dev libidn11-dev \
+	libpq-dev libprotobuf-dev protobuf-compiler && \
+	cd /opt/mastodon && \
+	bundle install -j$(nproc) --deployment --without development test && \
+	yarn install --pure-lockfile
 
-RUN bundle config build.nokogiri --with-iconv-lib=/usr/local/lib --with-iconv-include=/usr/local/include \
- && bundle install -j$(getconf _NPROCESSORS_ONLN) --deployment --without test development \
- && yarn global add node-gyp \
- && yarn --pure-lockfile \
- && yarn cache clean
+FROM ubuntu:18.04
 
-RUN addgroup -g ${GID} mastodon && adduser -h /mastodon -s /bin/sh -D -G mastodon -u ${UID} mastodon \
- && mkdir -p /mastodon/public/system /mastodon/public/assets /mastodon/public/packs \
- && chown -R mastodon:mastodon /mastodon/public
+COPY --from=build-dep /opt/node /opt/node
+COPY --from=build-dep /opt/ruby /opt/ruby
+COPY --from=build-dep /opt/jemalloc /opt/jemalloc
 
-COPY . /mastodon
+ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin:/opt/mastodon/bin"
+ENV TINI_VERSION="0.18.0"
 
-RUN chown -R mastodon:mastodon /mastodon
+# Create the mastodon user
+RUN apt update && \
+	echo "Etc/UTC" > /etc/localtime && \
+	ln -s /opt/jemalloc/lib/* /usr/lib/ && \
+	apt -y dist-upgrade && \
+	apt install -y whois && \
+	addgroup --gid 991 mastodon && \
+	useradd -m -u 991 -g 991 -d /opt/mastodon mastodon && \
+	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
 
-VOLUME /mastodon/public/system /mastodon/public/assets /mastodon/public/packs
+COPY --from=build-dep --chown=991:991 /opt/mastodon /opt/mastodon
+
+RUN apt -y --no-install-recommends install \
+	  libssl1.1 libpq5 imagemagick ffmpeg \
+	  libicu60 libprotobuf10 libidn11 \
+	  file ca-certificates tzdata && \
+	ln -s /opt/mastodon /mastodon && \
+	gem install bundler
+
+# Clean up more dirs
+RUN rm -rf /var/cache && \
+	rm -rf /var/apt
+
+# Add tini
+ENV TINI_SUM="12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855"
+ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
+RUN echo "$TINI_SUM tini" | sha256sum -c -
+RUN chmod +x /tini
+
+# Run in prod mode
+ENV RAILS_ENV="production"
+ENV NODE_ENV="production"
+
+# Tell rails to serve static files
+ENV RAILS_SERVE_STATIC_FILES="true"
 
 USER mastodon
-
-ENTRYPOINT ["/sbin/tini", "--"]
+WORKDIR /opt/mastodon
+ENTRYPOINT ["/tini", "--"]

@@ -26,7 +26,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.3
     env_file: .env.production
     environment:
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      # Lowering ES ram temporarily, see: https://mastodon.technology/@announcements/100616894738135504
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     networks:
       - internal_network
     volumes:

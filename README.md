@@ -28,13 +28,14 @@ git commit -a # Use auto-generated commit message.
 git commit -am "Releasing Docker image for $TAGNAME."
 git tag $RELEASE_TAG_NAME
 git push origin $RELEASE_TAG_NAME
+# Verify release is building on Docker Hub. Take a break, it'll be a while.
 ```
 
 ## Deploying
 
 Deploying **must always** be done to the staging server first.
 
-New tags and branches on the repo are build on Docker Hub, [here](https://hub.docker.com/r/ashfurrow/mastodon/). Then, edit `docker-compose.yml` on staging. The Docker tags are the same as the git tags, so the compose file should be changed to point to that new tag name.
+New tags and branches on the repo are [built on Docker Hub](https://hub.docker.com/r/ashfurrow/mastodon/). Once built, edit `docker-compose.yml`. The Docker tags are the same as the git tags, so the compose file should be changed to point to that new tag name.
 
 ```sh
 # ssh'd into a server in the `mastodon` folder.

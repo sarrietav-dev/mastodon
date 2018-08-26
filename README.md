@@ -37,8 +37,14 @@ Deploying **must always** be done to the staging server first.
 
 New tags and branches on the repo are [built on Docker Hub](https://hub.docker.com/r/ashfurrow/mastodon/). Once built, edit `docker-compose.yml`. The Docker tags are the same as the git tags, so the compose file should be changed to point to that new tag name.
 
+There's something I don't yet understand with the relationship between the `/public` folder in the _source repo_ and the folder in the Docker container, which `docker-compose.yml` maps to be the same folder. That's okay, I just don't get it yet, so when deploying, check out the same source that the Docker image was built from, and try to figure it out.
+
 ```sh
 # ssh'd into a server in the `mastodon` folder.
+git pull
+git stash # If necessary for local docker-compose.yml changes.
+git checkout $RELEASE_TAG_NAME
+git stash pop
 vim docker-compose.yml # edit `image:` values to point to $RELEASE_TAG_NAME.
 docker-compose up -d
 # Test, verify things work (see preflight checklist).

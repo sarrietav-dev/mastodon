@@ -33,8 +33,8 @@ services:
       - /mnt/volume-nyc1-02:/usr/share/elasticsearch/data
 
   web:
-    build: .
-    image: sirboops/mastodon
+    # build: .
+    image: ashfurrow/mastodon:m.t-release-2.4.3
     restart: always
     env_file: .env.production
     command: "bundle exec puma -C config/puma.rb"
@@ -53,8 +53,8 @@ services:
       - ./public/system:/opt/mastodon/public/system
 
   streaming:
-    build: .
-    image: sirboops/mastodon
+    # build: .
+    image: ashfurrow/mastodon:m.t-release-2.4.3
     restart: always
     env_file: .env.production
     command: yarn start
@@ -68,8 +68,8 @@ services:
       - redis
 
   sidekiq:
-    build: .
-    image: sirboops/mastodon
+    # build: .
+    image: ashfurrow/mastodon:m.t-release-2.4.3
     restart: always
     environment:
       - DB_POOL=50

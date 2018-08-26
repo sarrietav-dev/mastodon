@@ -55,13 +55,15 @@ ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 RUN npm install -g yarn && \
 	gem install bundler
 
-# Added to support custom source location. See: https://gist.github.com/Sir-Boops/d748a5be6da4f02b41ea8b0f54f9c62e
-COPY . /opt/mastodon
+ENV GIT_TAG="add3b63a0c84dbad936c461ae2617b1f995fe85b"
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
+	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \
 	cd /opt/mastodon && \
+	git checkout $GIT_TAG && \
 	bundle install -j$(nproc) --deployment --without development test && \
-	yarn install --pure-lockfile
+	yarn install --pure-lockfile && \
+	rm -rf .git
 
 FROM ubuntu:18.04
 

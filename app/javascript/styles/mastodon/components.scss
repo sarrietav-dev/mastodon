@@ -545,7 +545,7 @@
         font-family: 'mastodon-font-sans-serif', sans-serif;
         font-size: 14px;
         font-weight: 600;
-        color: lighter-text-color;
+        color: $lighter-text-color;
 
         &.character-counter--over {
           color: $warning-red;

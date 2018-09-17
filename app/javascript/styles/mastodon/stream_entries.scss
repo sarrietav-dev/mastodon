@@ -84,7 +84,7 @@
         font-size: 14px;
 
         .status__relative-time {
-          color: $ui-primary-color;
+          color: $lighter-text-color;
         }
       }
     }
@@ -134,7 +134,7 @@
 
       span {
         font-size: 14px;
-        color: $ui-primary-color;
+        color: $lighter-text-color;
       }
     }
 
@@ -225,7 +225,7 @@
 
     .detailed-status__meta {
       margin-top: 15px;
-      color: $ui-primary-color;
+      color: $lighter-text-color;
       font-size: 14px;
       line-height: 18px;
 

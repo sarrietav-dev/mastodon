@@ -545,7 +545,7 @@
         font-family: 'mastodon-font-sans-serif', sans-serif;
         font-size: 14px;
         font-weight: 600;
-        color: lighten($ui-base-color, 12%);
+        color: lighter-text-color;
 
         &.character-counter--over {
           color: $warning-red;
@@ -1649,7 +1649,7 @@ a.account__display-name {
     &:hover,
     &:active {
       background: $ui-highlight-color;
-      color: $ui-secondary-color;
+      color: $secondary-text-color;
       outline: 0;
     }
   }
@@ -4888,7 +4888,7 @@ a.status-card {
 
   h4 {
     text-transform: uppercase;
-    color: $ui-primary-color;
+    color: $light-text-color;
     font-size: 13px;
     font-weight: 500;
     margin-bottom: 10px;

@@ -48,8 +48,6 @@ services:
       - redis
       - es
     volumes:
-      - ./public/assets:/opt/mastodon/public/assets
-      - ./public/packs:/opt/mastodon/public/packs
       - ./public/system:/opt/mastodon/public/system
 
   streaming:
@@ -72,7 +70,7 @@ services:
     environment:
       - DB_POOL=50
     env_file: .env.production
-    command: bundle exec sidekiq -c 50 -q default -q mailers -q pull -q push
+    command: bundle exec sidekiq -c 50 -q default -q push -q mailers -q pull
     depends_on:
       - db
       - redis
@@ -80,7 +78,6 @@ services:
       - external_network
       - internal_network
     volumes:
-      - ./public/packs:/opt/mastodon/public/packs
       - ./public/system:/opt/mastodon/public/system
 ## Uncomment to enable federation with tor instances along with adding the following ENV variables
 ## http_proxy=http://privoxy:8118

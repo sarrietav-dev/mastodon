@@ -111,5 +111,12 @@ ENV NODE_ENV="production"
 ENV RAILS_SERVE_STATIC_FILES="true"
 
 USER mastodon
+
+# Precompile assets
+RUN cd ~ && \
+	OTP_SECRET=precompile_placeholder SECRET_KEY_BASE=precompile_placeholder rails assets:precompile && \
+	yarn cache clean
+
 WORKDIR /opt/mastodon
+
 ENTRYPOINT ["/tini", "--"]

@@ -55,7 +55,7 @@ ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 RUN npm install -g yarn && \
 	gem install bundler
 
-ENV MASTO_HASH="84085558e0e002dffc548a4528addcb98ead43b6"
+ENV MASTO_HASH="3f210372a4d97a2d0b76040a3698affc3a34e381"
 RUN apt -y install git libicu-dev libidn11-dev \
 	libpq-dev libprotobuf-dev protobuf-compiler && \
 	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \

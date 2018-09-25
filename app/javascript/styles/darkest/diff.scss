@@ -1,8 +1,3 @@
-// mastodon/accounts.scss
-.activity-stream-tabs {
-  background: #ffffff;
-}
-
 // mastodon/components.scss
 .compose-form {
   .compose-form__buttons-wrapper {
@@ -44,8 +39,6 @@
 // mastodon/stream_entries.scss
 .activity-stream {
   .entry {
-    background: $simple-background-color;
-
     .detailed-status.light,
     .status.light,
     .more.light {

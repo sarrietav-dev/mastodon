@@ -16,4 +16,10 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 end
 
+# See note in Gemfile.
+before_fork do
+  require 'puma_worker_killer'
+  PumaWorkerKiller.start
+end
+
 plugin :tmp_restart

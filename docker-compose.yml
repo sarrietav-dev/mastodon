@@ -70,7 +70,7 @@ services:
     environment:
       - DB_POOL=50
     env_file: .env.production
-    command: bundle exec sidekiq -c 50 -q default -q push -q mailers -q pull
+    command: bundle exec sidekiq -c 30 -q default -q push -q mailers -q pull
     depends_on:
       - db
       - redis

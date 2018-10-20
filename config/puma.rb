@@ -19,6 +19,9 @@ end
 # See note in Gemfile.
 before_fork do
   require 'puma_worker_killer'
+  PumaWorkerKiller.config do |config|
+    config.ram = 1024
+  end
   PumaWorkerKiller.start
 end
 

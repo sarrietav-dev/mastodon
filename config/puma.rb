@@ -20,7 +20,7 @@ end
 before_fork do
   require 'puma_worker_killer'
   PumaWorkerKiller.config do |config|
-    config.ram = 1024
+    config.ram = 2048
   end
   PumaWorkerKiller.start
 end

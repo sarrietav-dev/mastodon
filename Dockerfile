@@ -33,7 +33,7 @@ RUN apt -y install autoconf && \
 	make install_bin install_include install_lib
 
 # Install ruby
-ENV RUBY_VER="2.5.1"
+ENV RUBY_VER="2.5.3"
 ENV CPPFLAGS="-I/opt/jemalloc/include"
 ENV LDFLAGS="-L/opt/jemalloc/lib/"
 RUN apt -y install zlib1g-dev libssl-dev \

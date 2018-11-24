@@ -33,7 +33,7 @@ services:
       - /mnt/volume-nyc1-02:/usr/share/elasticsearch/data
 
   web:
-    image: quay.io/ashfurrow/mastodon:m.t-2.6.1
+    image: quay.io/ashfurrow/mastodon:m.t-2.6.2
     restart: always
     env_file: .env.production
     command: "bundle exec puma -C config/puma.rb"
@@ -50,7 +50,7 @@ services:
       - ./public/system:/opt/mastodon/public/system
 
   streaming:
-    image: quay.io/ashfurrow/mastodon:m.t-2.6.1
+    image: quay.io/ashfurrow/mastodon:m.t-2.6.2
     restart: always
     env_file: .env.production
     command: yarn start
@@ -64,7 +64,7 @@ services:
       - redis
 
   sidekiq:
-    image: quay.io/ashfurrow/mastodon:m.t-2.6.1
+    image: quay.io/ashfurrow/mastodon:m.t-2.6.2
     restart: always
     environment:
       - DB_POOL=50

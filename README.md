@@ -1,4 +1,4 @@
-This is my fork of Mastodon and the code running on `mastodon.technology`. For documentation about the setup there and how I deploy stuff, etc, [check out the `public` branch](https://github.com/ashfurrow/mastodon/tree/public).
+This is my fork of Mastodon and the code running on `mastodon.technology`. For documentation about the setup there and how I deploy stuff, etc, [check out the `public` branch](https://github.com/ashfurrow/mastodon/tree/public). Docker images are [built on Quay.io](https://quay.io/repository/ashfurrow/mastodon).
 
 ![Mastodon](https://i.imgur.com/NhZc40l.png)
 ========

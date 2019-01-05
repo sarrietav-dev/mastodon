@@ -14,6 +14,30 @@ think your instance is blocked incorrectly.
 
 Colour scheme available [here](http://www.colourlovers.com/palette/298957/Paris_mon_Amour).
 
+## Moderation
+
+Our moderators are:
+
+- [Me](https://mastodon.technology/@ashfurrow)
+- [Fuzzface](https://mastodon.technology/@fuzzface)
+- [Brian!](https://mastodon.technology/@bclindner)
+
+When we get a report, we evaluate the problematic user or post against our [Code of Conduct](https://mastodon.technology/about/more). Mods make a call, discussing with each other to come to a consensus when necessary. Rather than prescribe a comprehensice moderation strategy, what follows is a list of scenarios and actions we take. In any case, we privately contact reporting users and let them know what actions we took (only if they're a local user; remote reports are anonymous).
+
+### A user is excessively promoting themselves
+
+Advertising and excessibe promotion is prohibited by our CoC. 
+
+- If it's a spam bot, we will suspend them.
+- If it's a company/conference/something else that is promoting themselves appropriately, but excessively, we talk to them to make sure they follow the CoC. They only get one warning, though, before we silence them
+
+### A user is posting prohibited context
+
+For example: pornography, untagged NSFW content, racism, impersonation, doxing etc.
+
+- For clearly malicious users, we suspend them.
+- For users with good past behaviour or for borderline content, we silence them until we can discuss next steps with them.
+
 ## Upgrading
 
 Fetch upstream, merge with tag, test locally if necessary, push to git with tag to test on staging.

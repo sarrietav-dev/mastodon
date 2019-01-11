@@ -61,6 +61,7 @@ RUN apt -y install git libicu-dev libidn11-dev \
 	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \
 	cd /opt/mastodon && \
 	git checkout $MASTO_HASH && \
+	gem install bundler \
 	bundle install -j$(nproc) --deployment --without development test && \
 	yarn install --pure-lockfile && \
 	rm -rf .git

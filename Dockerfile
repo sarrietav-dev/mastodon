@@ -7,7 +7,7 @@ FROM ubuntu:18.04 as build-dep
 SHELL ["bash", "-c"]
 
 # Install Node
-ENV NODE_VER="8.12.0"
+ENV NODE_VER="8.15.0"
 RUN	echo "Etc/UTC" > /etc/localtime && \
 	apt update && \
 	apt -y dist-upgrade && \
@@ -33,7 +33,7 @@ RUN apt -y install autoconf && \
 	make install_bin install_include install_lib
 
 # Install ruby
-ENV RUBY_VER="2.5.3"
+ENV RUBY_VER="2.6.0"
 ENV CPPFLAGS="-I/opt/jemalloc/include"
 ENV LDFLAGS="-L/opt/jemalloc/lib/"
 RUN apt -y install zlib1g-dev libssl-dev \
@@ -53,7 +53,7 @@ RUN apt -y install zlib1g-dev libssl-dev \
 ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 
 RUN npm install -g yarn && \
-	gem install bundler
+	gem install bundler -v 1.17.3
 
 ENV MASTO_HASH="95fc00166eae4128ab2f87b445dedf5c23bdeb2f"
 RUN apt -y install git libicu-dev libidn11-dev \
@@ -61,7 +61,6 @@ RUN apt -y install git libicu-dev libidn11-dev \
 	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \
 	cd /opt/mastodon && \
 	git checkout $MASTO_HASH && \
-	gem install bundler \
 	bundle install -j$(nproc) --deployment --without development test && \
 	yarn install --pure-lockfile && \
 	rm -rf .git
@@ -94,6 +93,7 @@ RUN apt -y --no-install-recommends install \
 	  libssl1.1 libpq5 imagemagick ffmpeg \
 	  libicu60 libprotobuf10 libidn11 \
 	  file ca-certificates tzdata libreadline7 && \
+	apt -y install gcc && \
 	ln -s /opt/mastodon /mastodon && \
 	gem install bundler
 

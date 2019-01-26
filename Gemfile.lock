@@ -702,13 +702,8 @@ DEPENDENCIES
   i18n-tasks (~> 0.9)
   idn-ruby
   iso-639
-<<<<<<< HEAD
-  json-ld (~> 2.2)
-  json-ld-preloaded (~> 2.2)
-=======
   json-ld (~> 3.0)
   json-ld-preloaded (~> 3.0)
->>>>>>> v2.7.0
   kaminari (~> 1.1)
   letter_opener (~> 1.7)
   letter_opener_web (~> 1.3)

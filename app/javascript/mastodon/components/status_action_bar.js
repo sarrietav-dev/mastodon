@@ -150,6 +150,7 @@ class StatusActionBar extends ImmutablePureComponent {
 
     let menu = [];
     let reblogIcon = 'retweet';
+    let replyIcon;
     let replyTitle;
 
     menu.push({ text: intl.formatMessage(messages.open), action: this.handleOpen });
@@ -191,8 +192,10 @@ class StatusActionBar extends ImmutablePureComponent {
     }
 
     if (status.get('visibility') === 'direct') {
+      replyIcon = 'reply';
       reblogIcon = 'envelope';
     } else if (status.get('visibility') === 'private') {
+      replyIcon = 'reply-all';
       reblogIcon = 'lock';
     }
 

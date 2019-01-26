@@ -778,8 +778,4 @@ RUBY VERSION
    ruby 2.6.0p0
 
 BUNDLED WITH
-<<<<<<< HEAD
-   1.17.1
-=======
    1.17.3
->>>>>>> v2.7.0

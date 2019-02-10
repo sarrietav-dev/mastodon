@@ -192,17 +192,17 @@ class StatusActionBar extends ImmutablePureComponent {
     }
 
     if (status.get('visibility') === 'direct') {
-      replyIcon = 'reply';
       reblogIcon = 'envelope';
     } else if (status.get('visibility') === 'private') {
-      replyIcon = 'reply-all';
       reblogIcon = 'lock';
     }
 
     if (status.get('in_reply_to_id', null) === null) {
       replyTitle = intl.formatMessage(messages.reply);
+      replyIcon = 'reply';
     } else {
       replyTitle = intl.formatMessage(messages.replyAll);
+      replyIcon = 'reply-all';
     }
 
     const shareButton = ('share' in navigator) && status.get('visibility') === 'public' && (

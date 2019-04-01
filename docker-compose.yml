@@ -8,7 +8,7 @@ services:
     image: postgres:9.6-alpine
     env_file: .env.production
     volumes:
-      - /mnt/volume-nyc1-01/postgres:/var/lib/postgresql/data
+      - /mnt/volume_nyc1_dbs/postgres:/var/lib/postgresql/data
     networks:
       - internal_network
     healthcheck:
@@ -19,7 +19,7 @@ services:
     image: redis:4.0-alpine
     env_file: .env.production
     volumes:
-      - /mnt/volume-nyc1-01/redis:/data
+      - /mnt/volume_nyc1_dbs/redis:/data
     networks:
       - internal_network
     healthcheck:

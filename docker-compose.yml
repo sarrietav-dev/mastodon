@@ -34,7 +34,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - /mnt/volume-nyc1-02:/usr/share/elasticsearch/data
+      - ./elasticsearch:/usr/share/elasticsearch/data
 
   web:
     image: quay.io/ashfurrow/mastodon:m.t-2.7.1-icon-fix

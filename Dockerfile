@@ -1,6 +1,3 @@
-# Taken from Sir Boops' Dockerfile: https://git.sergal.org/Sir-Boops/docker-mastodon/src/branch/master/Dockerfile
-# For the purposes of using jemalloc.
-
 FROM ubuntu:18.04 as build-dep
 
 # Use bash for the shell
@@ -22,7 +19,8 @@ RUN	echo "Etc/UTC" > /etc/localtime && \
 
 # Install jemalloc
 ENV JE_VER="5.1.0"
-RUN apt -y install autoconf && \
+RUN apt update && \
+	apt -y install autoconf && \
 	cd ~ && \
 	wget https://github.com/jemalloc/jemalloc/archive/$JE_VER.tar.gz && \
 	tar xf $JE_VER.tar.gz && \
@@ -36,8 +34,10 @@ RUN apt -y install autoconf && \
 ENV RUBY_VER="2.6.1"
 ENV CPPFLAGS="-I/opt/jemalloc/include"
 ENV LDFLAGS="-L/opt/jemalloc/lib/"
-RUN apt -y install zlib1g-dev libssl-dev \
-	  libgdbm-dev libdb-dev libreadline-dev && \
+RUN apt update && \
+	apt -y install build-essential \
+		bison libyaml-dev libgdbm-dev libreadline-dev \
+		libncurses5-dev libffi-dev zlib1g-dev libssl-dev && \
 	cd ~ && \
 	wget https://cache.ruby-lang.org/pub/ruby/${RUBY_VER%.*}/ruby-$RUBY_VER.tar.gz && \
 	tar xf ruby-$RUBY_VER.tar.gz && \
@@ -53,17 +53,16 @@ RUN apt -y install zlib1g-dev libssl-dev \
 ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin"
 
 RUN npm install -g yarn && \
-	gem install bundler -v 1.17.3
+	gem install bundler && \
+	apt update && \
+	apt -y install git libicu-dev libidn11-dev \
+	libpq-dev libprotobuf-dev protobuf-compiler
 
-ENV MASTO_HASH="95bc36fbf94b481f234949f09540c4537024fe16"
-RUN apt -y install git libicu-dev libidn11-dev \
-	libpq-dev libprotobuf-dev protobuf-compiler && \
-	git clone https://github.com/ashfurrow/mastodon /opt/mastodon && \
-	cd /opt/mastodon && \
-	git checkout $MASTO_HASH && \
+COPY Gemfile* package.json yarn.lock /opt/mastodon/
+
+RUN cd /opt/mastodon && \
 	bundle install -j$(nproc) --deployment --without development test && \
-	yarn install --pure-lockfile && \
-	rm -rf .git
+	yarn install --pure-lockfile
 
 FROM ubuntu:18.04
 
@@ -76,30 +75,27 @@ COPY --from=build-dep /opt/jemalloc /opt/jemalloc
 ENV PATH="${PATH}:/opt/ruby/bin:/opt/node/bin:/opt/mastodon/bin"
 
 # Create the mastodon user
+ARG UID=991
+ARG GID=991
 RUN apt update && \
 	echo "Etc/UTC" > /etc/localtime && \
 	ln -s /opt/jemalloc/lib/* /usr/lib/ && \
 	apt -y dist-upgrade && \
-	apt install -y whois && \
-	addgroup --gid 991 mastodon && \
-	useradd -m -u 991 -g 991 -d /opt/mastodon mastodon && \
+	apt install -y whois wget && \
+	addgroup --gid $GID mastodon && \
+	useradd -m -u $UID -g $GID -d /opt/mastodon mastodon && \
 	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
-
-# Copy over masto source from building and set permissions
-COPY --from=build-dep --chown=991:991 /opt/mastodon /opt/mastodon
 
 # Install masto runtime deps
 RUN apt -y --no-install-recommends install \
 	  libssl1.1 libpq5 imagemagick ffmpeg \
-	  libicu60 libprotobuf10 libidn11 \
+	  libicu60 libprotobuf10 libidn11 libyaml-0-2 \
 	  file ca-certificates tzdata libreadline7 && \
 	apt -y install gcc && \
 	ln -s /opt/mastodon /mastodon && \
-	gem install bundler
-
-# Clean up more dirs
-RUN rm -rf /var/cache && \
-	rm -rf /var/apt
+	gem install bundler && \
+	rm -rf /var/cache && \
+	rm -rf /var/lib/apt
 
 # Add tini
 ENV TINI_VERSION="0.18.0"
@@ -107,6 +103,10 @@ ENV TINI_SUM="12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855"
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tini
 RUN echo "$TINI_SUM tini" | sha256sum -c -
 RUN chmod +x /tini
+
+# Copy over masto source, and dependencies from building, and set permissions
+COPY --chown=mastodon:mastodon . /opt/mastodon
+COPY --from=build-dep --chown=mastodon:mastodon /opt/mastodon /opt/mastodon
 
 # Run masto services in prod mode
 ENV RAILS_ENV="production"

@@ -21,6 +21,7 @@ Our moderators are:
 - [Me](https://mastodon.technology/@ashfurrow)
 - [Fuzzface](https://mastodon.technology/@fuzzface)
 - [Brian!](https://mastodon.technology/@bclindner)
+- [Daniel Glus](https://mastodon.technology/@danielhglus)
 
 When we get a report, we evaluate the problematic user or post against our [Code of Conduct](https://mastodon.technology/about/more). Mods make a call, discussing with each other to come to a consensus when necessary. Rather than prescribe a comprehensice moderation strategy, what follows is a list of scenarios and actions we take. In any case, we privately contact reporting users and let them know what actions we took (only if they're a local user; remote reports are anonymous).
 
@@ -110,6 +111,19 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | mu.zaitcev.nu | Suspended |  |
 
 </details>
+
+## Handling the Bus Factor
+
+In an effort to reduce the [bus factor](https://en.wikipedia.org/wiki/Bus_factor) and make mastodon.technology resilient to the single point of failure of its admin, me, we have the following emergency protocol in place. It's not perfect, and it's not final, but we will refine it over time.
+
+If the worst happens to me, eventually DigitalOcean/AWS/Mailgun/Hover billing failures will cause the instance to collapse. The plan mitigates the sudden loss of the instance and user data; its goal is to give users the chance to export their data and migrate to another instance.
+
+In the event that I disappear and am not contactable for over a week, our mods will contact a designated person who knows me in the real world and who can confirm if I'm permanently unable to administer the instance. After 7 days of being unable to contact me, they can reach out to this person (whose identity is a secret for security reasons) and confirm the situation.
+
+If I'm confirmed to no longer be able to administer mastodon.technology, the instance mods have the following responsibility:
+
+- Log into the [@announcements](https://mastodon.technology/@announcements) account and alert users of imminent instance closure and instruct them to export their data and migrate to another instance.
+- Continue moderating the instance as long as its accessible.
 
 ## Upgrading
 

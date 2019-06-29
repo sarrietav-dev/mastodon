@@ -38,6 +38,79 @@ For example: pornography, untagged NSFW content, racism, impersonation, doxing e
 - For clearly malicious users, we suspend them.
 - For users with good past behaviour or for borderline content, we silence them until we can discuss next steps with them.
 
+## Blocked Instances
+
+Here are the instances that m.t has blocked. This list is not meant to be authoritative for other administrators. We reserve the right to silence or suspend any instance for any reason. If you are an administrator of an instance on this list, feel that you shouldn't be blocked, and have [checked our Code of Conduct](https://mastodon.technology/about/more), you can [contact Ash Furrow through email](mailto:ash@ashfurrow.com) to discuss getting unblocked.
+
+<details><summary>List of silenced and suspended instances</summary>
+
+| Instance URL | Severity | Notes |
+|---|---|---|
+| rainbowdash.net | Silenced |  |
+| shitposter.club | Silenced |  |
+| freezepeach.xyz | Silenced |  |
+| social.headsca.la | Silenced |  |
+| woofer.alfter.us | Silenced |  |
+| social.au2pb.net | Silenced |  |
+| gorf.club | Silenced |  |
+| sealion.club | Silenced |  |
+| gs.smuglo.li | Silenced |  |
+| unsafe.space | Silenced |  |
+| wrongthink.net | Silenced |  |
+| noagendasocial.com |  |   |
+| porntoot.com | Suspended |  |
+| pawoo.net | Suspended |  |
+| ediot.social | Silenced  |  |
+| admins.town | Silenced |  |
+| social.targaryen.house | Silenced |  |
+| sunshinegardens.org | Silenced | Rejecting media files |
+| preteengirls.biz | Suspended |  |
+| ika.moe | Silenced |  |
+| anitwitter.moe | Silenced |  |
+| baraag.net | Suspended |  |
+| social.allthefallen.ninja | Suspended |  |
+| social.homunyan.com | Silenced |  |
+| social.hidamari.blue | Silenced |  |
+| libertarianism.club | Silenced |  |
+| toot.love | Silenced |  |
+| pl.smuglo.li | Suspended |  |
+| pleroma.cucked.me | Suspended |  |
+| voluntaryism.club | Silenced |  |
+| social.heldscal.la | Silenced |  |
+| gay.nsfw.onl | Suspended |  |
+| switter.at | Silenced |  |
+| pleroma.rareome.ga | Suspended |  |
+| wxw.moe | Silenced |  |
+| kinkyelephant.com | Silenced |  |
+| thechad.zone | Suspended |  |
+| bofa.lol | Suspended |  |
+| raki.social | Suspended |  |
+| albin.social | Suspended |  |
+| newjack.city | Suspended |  |
+| artritelacy.jp | Suspended |  |
+| gameliberty.club | Silenced |  |
+| humblr.social | Suspended |  |
+| sinblr.com | Silenced | Rejecting media files |
+| feminism.lgbt | Silenced | Rejecting media files |
+| rubber.social | Silenced | Rejecting media files |
+| gasthe.lgbt | Suspended |  |
+| neckbeard.xyz | Suspended |  |
+| freespeech.firedragonstudios.com | Suspended |  |
+| anime.website | Suspended |  |
+| nomoresha.me | Suspended |  |
+| social.quodverum.com | Suspended |  |
+| xn--6r8h.tk | Suspended |  |
+| freespeechextremist.com | Suspended |  |
+| librem.one | Silenced |  |
+| relay.selfhosting.rocks | Suspended |  |
+| gab.com | Suspended |  |
+| gab.ai | Suspended |  |
+| gab.io | Suspended |  |
+| develop.gab.com | Suspended |  |
+| mu.zaitcev.nu | Suspended |  |
+
+</details>
+
 ## Upgrading
 
 Fetch upstream, merge with tag, test locally if necessary, push to git with tag to test on staging.

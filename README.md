@@ -109,6 +109,7 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | gab.io | Suspended |  |
 | develop.gab.com | Suspended |  |
 | mu.zaitcev.nu | Suspended |  |
+| weedis.life | Suspended |  |
 
 </details>
 

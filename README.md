@@ -110,6 +110,9 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | develop.gab.com | Suspended |  |
 | mu.zaitcev.nu | Suspended |  |
 | weedis.life | Suspended |  |
+| kiwifarms.net | Suspended |  |
+| kiwifarms.is | Suspended |  |
+| kiwifarms.cc | Suspended |  |.
 
 </details>
 

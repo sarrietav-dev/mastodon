@@ -112,7 +112,8 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | weedis.life | Suspended |  |
 | kiwifarms.net | Suspended |  |
 | kiwifarms.is | Suspended |  |
-| kiwifarms.cc | Suspended |  |.
+| kiwifarms.cc | Suspended |  |
+| gabfed.com | Suspended |  |
 
 </details>
 

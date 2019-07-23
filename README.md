@@ -114,6 +114,7 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | kiwifarms.is | Suspended |  |
 | kiwifarms.cc | Suspended |  |
 | gabfed.com | Suspended |  |
+| speakfree.world | Suspended |  |
 
 </details>
 

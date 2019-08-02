@@ -115,6 +115,7 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | kiwifarms.cc | Suspended |  |
 | gabfed.com | Suspended |  |
 | speakfree.world | Suspended |  |
+| spinster.xyz | Suspended | Gab instance |
 
 </details>
 

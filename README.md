@@ -117,6 +117,9 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | speakfree.world | Suspended |  |
 | spinster.xyz | Suspended | Gab instance |
 | liberdon.com | Suspended | |
+| freefedifollowers.ga | Suspended | |
+| fedichive.tk | Suspended | |
+| mastodon.starrevolution.org | Suspended | |
 
 </details>
 

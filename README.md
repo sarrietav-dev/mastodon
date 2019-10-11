@@ -120,6 +120,7 @@ Here are the instances that m.t has blocked. This list is not meant to be author
 | freefedifollowers.ga | Suspended | |
 | fedichive.tk | Suspended | |
 | mastodon.starrevolution.org | Suspended | |
+| qoto.org | Suspended | |
 
 </details>
 

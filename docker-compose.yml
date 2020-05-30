@@ -9,6 +9,7 @@ services:
     env_file: .env.production
     volumes:
       - /mnt/volume_nyc1_01/postgres:/var/lib/postgresql/data
+    shm_size: 256mb
     networks:
       - internal_network
     healthcheck:

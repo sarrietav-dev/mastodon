@@ -1,3 +1,4 @@
+@import 'boost.scss';
 // mastodon/components.scss
 .compose-form {
   .compose-form__buttons-wrapper {
@@ -31,9 +32,23 @@
 }
 
 // mastodon/emoji_picker.scss
-
 .emoji-mart-anchors {
   color: $ui-simple-bg-contrast;
+}
+.emoji-mart-bar  {
+  border: 0 solid $ui-base-color;
+}
+.emoji-mart-bar:first-child  {
+  background: $ui-base-color; 
+}
+.emoji-mart-anchor-selected {
+  color: $boosted-color;
+  &:hover {
+    color: darken($boosted-color, 10%);
+  }
+}
+.emoji-mart-anchor-bar {
+  background-color: $boosted-color;
 }
 
 // mastodon/stream_entries.scss
@@ -76,3 +91,4 @@
     color: $ui-simple-bg-contrast;
   }
 }
+

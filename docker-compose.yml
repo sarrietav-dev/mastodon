@@ -31,7 +31,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.3
     env_file: .env.production
     environment:
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "ES_JAVA_OPTS=-Xms1500m -Xmx1500m"
     networks:
       - internal_network
     volumes:

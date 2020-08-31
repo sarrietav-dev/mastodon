@@ -4,5 +4,6 @@ Darkest: styles/darkest.scss
 Eugen: styles/application.scss
 SolarizedDark: styles/solarizeddark.scss
 Woolly: styles/woolly.scss
+FairyFloss: styles/fairyfloss.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss

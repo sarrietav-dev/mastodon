@@ -20,5 +20,6 @@ class ActivityPub::ProcessingWorker
       Rails.logger.warn "Skipping a retry for ActivityPub object: #{e}, error: #{e}, #{e.message}"
     else
       raise # Re-raise error to retry Sidekiq job.
+    end
   end
 end

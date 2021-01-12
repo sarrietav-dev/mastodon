@@ -8,7 +8,7 @@ services:
     image: postgres:9.6-alpine
     env_file: .env.production
     volumes:
-      - /mnt/volume_nyc1_01/postgres:/var/lib/postgresql/data
+      - /mnt/volume_nyc1_new_postgres/postgres:/var/lib/postgresql/data
     shm_size: 256mb
     networks:
       - internal_network
@@ -20,7 +20,7 @@ services:
     image: redis:5.0-alpine
     env_file: .env.production
     volumes:
-      - /mnt/volume_nyc1_01/redis:/data
+      - /mnt/volume_nyc1_new_postgres/redis:/data
     networks:
       - internal_network
     healthcheck:

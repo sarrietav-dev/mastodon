@@ -20,13 +20,4 @@ on_worker_boot do
   end
 end
 
-# See note in Gemfile.
-before_fork do
-  require 'puma_worker_killer'
-  PumaWorkerKiller.config do |config|
-    config.ram = 2048
-  end
-  PumaWorkerKiller.start
-end
-
 plugin :tmp_restart

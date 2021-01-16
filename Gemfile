@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-# Mastodon appears to grow in memory use for over a week, linearly.
-# Switching to jemalloc improved the rat eof growth but didn't stop it.
-# So this restarts Puma workers when their memory use gets too high.
-# Sorry.
-gem 'puma_worker_killer'
-
 source 'https://rubygems.org'
 ruby '>= 2.5.0', '< 3.0.0'
 

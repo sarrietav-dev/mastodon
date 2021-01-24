@@ -85,9 +85,9 @@ services:
     image: quay.io/ashfurrow/mastodon:m.t-3.3.0
     restart: always
     environment:
-      - DB_POOL=50
+      - DB_POOL=100
     env_file: .env.production
-    command: bundle exec sidekiq -c 60 -q default -q push -q mailers -q pull
+    command: bundle exec sidekiq -c 100
     depends_on:
       - db
       - redis

@@ -21,7 +21,6 @@ Our moderators are:
 - [Me](https://mastodon.technology/@ashfurrow)
 - [Fuzzface](https://mastodon.technology/@fuzzface)
 - [Brian!](https://mastodon.technology/@bclindner)
-- [Daniel Glus](https://mastodon.technology/@danielhglus)
 
 When we get a report, we evaluate the problematic user or post against our [Code of Conduct](https://mastodon.technology/about/more). Mods make a call, discussing with each other to come to a consensus when necessary. Rather than prescribe a comprehensice moderation strategy, what follows is a list of scenarios and actions we take. In any case, we privately contact reporting users and let them know what actions we took (only if they're a local user; remote reports are anonymous).
 

@@ -47,7 +47,7 @@ services:
         hard: -1
 
   web:
-    image: quay.io/ashfurrow/mastodon:m.t-3.3.0-csp-fix
+    image: quay.io/ashfurrow/mastodon:m.t-3.4.1
     restart: always
     env_file: .env.production
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
@@ -66,7 +66,7 @@ services:
       - ./public/system:/opt/mastodon/public/system
 
   streaming:
-    image: quay.io/ashfurrow/mastodon:m.t-3.3.0-csp-fix
+    image: quay.io/ashfurrow/mastodon:m.t-3.4.1
     restart: always
     env_file: .env.production
     command: node ./streaming
@@ -82,7 +82,7 @@ services:
       - redis
 
   sidekiq:
-    image: quay.io/ashfurrow/mastodon:m.t-3.3.0-csp-fix
+    image: quay.io/ashfurrow/mastodon:m.t-3.4.1
     restart: always
     environment:
       - DB_POOL=100

@@ -58,18 +58,20 @@ class ColumnSettings extends React.PureComponent {
           {this.modeLabel(mode)}
         </span>
 
-        <AsyncSelect
-          isMulti
-          autoFocus
-          value={this.tags(mode)}
-          onChange={this.onSelect(mode)}
-          loadOptions={this.props.onLoad}
-          className='column-select__container'
-          classNamePrefix='column-select'
-          name='tags'
-          placeholder={this.props.intl.formatMessage(messages.placeholder)}
-          noOptionsMessage={this.noOptionsMessage}
-        />
+        <NonceProvider nonce={document.querySelector('meta[name=style-nonce]').content} cacheKey='tags'>
+          <AsyncSelect
+            isMulti
+            autoFocus
+            value={this.tags(mode)}
+            onChange={this.onSelect(mode)}
+            loadOptions={this.props.onLoad}
+            className='column-select__container'
+            classNamePrefix='column-select'
+            name='tags'
+            placeholder={this.props.intl.formatMessage(messages.placeholder)}
+            noOptionsMessage={this.noOptionsMessage}
+          />
+        </NonceProvider>
       </div>
     );
   }

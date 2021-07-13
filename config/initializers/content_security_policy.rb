@@ -49,6 +49,8 @@ end
 
 Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
 
+Rails.application.config.content_security_policy_nonce_directives = %w(style-src)
+
 Rails.application.reloader.to_prepare do
   PgHero::HomeController.content_security_policy do |p|
     p.script_src :self, :unsafe_inline, assets_host

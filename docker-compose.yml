@@ -47,7 +47,8 @@ services:
         hard: -1
 
   web:
-    image: quay.io/ashfurrow/mastodon:m.t-3.4.1-fixes-meta
+    build: .
+    image: tootsuite/mastodon:v3.4.5
     restart: always
     env_file: .env.production
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
@@ -66,7 +67,8 @@ services:
       - ./public/system:/opt/mastodon/public/system
 
   streaming:
-    image: quay.io/ashfurrow/mastodon:m.t-3.4.1-fixes-meta
+    build: .
+    image: tootsuite/mastodon:v3.4.5
     restart: always
     env_file: .env.production
     command: node ./streaming
@@ -82,7 +84,8 @@ services:
       - redis
 
   sidekiq:
-    image: quay.io/ashfurrow/mastodon:m.t-3.4.1-fixes-meta
+    build: .
+    image: tootsuite/mastodon:v3.4.5
     restart: always
     environment:
       - DB_POOL=100
